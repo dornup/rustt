@@ -7,7 +7,7 @@ fn main() {
     let ch = 'c'; // char - один символ!
     let arr = [1, 2, 3]; // array [] (массив) - длина не меняется, тип не меняется
     println!("{:?}", arr); // вывод в изначальном представлении (массив по другому не вывести, как иначе??)
-    println!("{}", arr[2]); // выводтретьего элемента
+    println!("{}", arr[2]); // вывод третьего элемента
     // arr[0] = 5; - нельзя, если immutable
     let mut arr1 = [1, 2, 3]; // mutable - изменяемая коллекция
     arr1[0] = 5; // так можно
@@ -15,5 +15,26 @@ fn main() {
 
     let v = vec![1, 2, 3]; // вектор - фиксированный тип, но длина изменяемая
     
+    // 
+    //
+    // lesson 2
+    // println!("{:?}", abc(5, 1).unwrap_or(0) + 2);
+    println!("{:?}", def(vec![1, 2, 3], 1));
+    println!("{:?}", usize::MAX);
+    println!("{:?}", u64::MAX);
 
+}
+
+fn abc(x: u8, y: u8) -> Option<u8>{
+    if x < y {
+        return None
+    }
+    return Some(x - y)
+}
+
+fn def(v: Vec<u8>, i: u8) -> Result<u8, u8>{
+    if v.len() as u8 >= i + 1 {
+        return Result::Ok(v[i as usize])
+    }
+    return Result::Err(0)
 }
