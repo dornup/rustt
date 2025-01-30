@@ -45,3 +45,4 @@ fn def(v: Vec<u8>, i: u8) -> Result<u8, u8>{  // lesson 2
     return Result::Err(0); // Подставится во 2 значение Result
 }
 
+// aaaaaa
