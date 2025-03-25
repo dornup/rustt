@@ -1,30 +1,68 @@
-use itertools::Itertools;
+fn add(a:i32, b:i32) -> i32 { // обычная функция, а хочеца анонимную(
+    a + b // tail expression
+}
 
 fn main() {
-    let mut m = [1, 2, 3];
-    m = m.map(|elem| elem+1);
-    println!("{:?}", m)
+    let add2 = |a, b| a + b  // ее анонимное + можно сделать {}
+    add(2, 3);
+    add2(2, 3);
 
-    let k = m.iter().fold(1, |acc, e| acc * e);
-    println!("{:?}", k)
+    let b = 3;
+    let add3 = |a| a + b; // берет значения извне, в отличие от обычной fn
+    add3(2);
+
+    let x = 3;
+    println!("{:05}", x) // 0>5 - выравнивание слева нули
+    println!("{:.2}", x) // цифры после запятой
+    println!("{}", (3_f64.sqrt().round() as u32).pow(2)) // - квадраты и степени
+
 }
 
-fn generate_range(start: usize, stop: usize, step: usize) -> Vec<usize> {
-    (start..=stop).step_by(step).collect()
+// задачки с codewars
+
+// Convert a Number to a String!
+fn number_to_string(i: i32) -> String {
+    // i.to_string() - работает
+    format!("{}", i)
 }
 
-fn name_shuffler(s: &str) -> String {
-    println!("{:?}", s.split_ascii_whitespace().rev().join(" "));
-    // s.rsplit(' ').join(" ")
-    String::new()
-}
-
-fn multi_table(n: u64) -> String {
-    (1..=10).map(|c|format!("{} * {} = {}", c, n, c*n)).join("\n")
-}
-
-fn sort_numbers(arr: &Vec<i32>) -> Vec<i32> {
-    let mut ans = arr.clone();
-    ans.sort_unstable();
-    ans
+// Number of Decimal Digits
+fn digits(n: u64) -> usize {
+    n
+    .to_string()
+    .len()
+    // n.to_string().chars().count() // - то же самое
   }
+
+// Sum of angles
+fn angle(n: u32) -> u32 {
+    (n - 2) * 180
+  }
+
+// Substituting Variables Into Strings: Padded Numbers
+fn solution(n: u32) -> String {
+    format!("Value is {:05}", n)
+}
+
+// Dollars and Cents
+fn format_money(amount: f64) -> String {
+    format!("${:.2}", amount)
+}
+
+// Find Nearest square number
+fn nearest_sq(n: u32) -> u32 {
+    (n as f64)
+    .sqrt()
+    .round()
+    .powi(2) as _
+}
+
+//Ones and Zeros
+fn binary_slice_to_number(slice: &[u32]) -> u32 {
+    //slice.iter().rev().enumerate().map(|(i,e)| e*2_u32.pow(i as u32)).sum::<u32>() // - map + sum = fold
+    slice
+    .iter()
+    .rev()
+    .enumerate()
+    .fold(0, |acc, (i,e)|acc + e*2_u32.pow(i as u32))
+}
